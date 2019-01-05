@@ -1,3 +1,5 @@
+/*shows node's oberver pattern*/
+
 // 1.) Import events module
 var events = require('events');
 

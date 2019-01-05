@@ -1,3 +1,5 @@
+/*read file sync and async*/
+
 //1.) load module filesystem
 var fs = require("fs");
 
@@ -9,7 +11,7 @@ var data = fs.readFileSync('Snip_2_input.txt');
 console.log(data.toString());
 
 //4.) print end message
-console.log("Program Ended fs.readFileSync");
+console.log("Program Ended fs.readFileSync\n");
 
 //5.) filesystem reader: 
 //fs.readFile is an async function
@@ -22,4 +24,4 @@ fs.readFile('Snip_2_input.txt', function (err, data) {
 });
 
 //6.) print end message
-console.log("Program Ended fs.readFile(async with callback)");
+console.log("Program Ended fs.readFile(async with callback)\n");
