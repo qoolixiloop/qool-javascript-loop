@@ -10,7 +10,8 @@ Reasoning: after running the script, sudo is no longer necessary, which would po
 
 ### Snip_1_callbacks.js
 Shows the flow of information with async pattern and callback function.  
-Code Patterns:  
+  
+Code patterns:  
 ```js
 function addUser(username,callback){
   setTimeout(function(){
@@ -21,7 +22,8 @@ function addUser(username,callback){
 
 ### Snip_2_readfilesync_readfilesasync.js
 Shows the flow of information with async readFile and callback function.  
-Code Patterns:  
+  
+Code patterns:  
 ```js
 var fs = require("fs");
 fs.readFile('Snip_2_input.txt', function (err, data) {
@@ -34,8 +36,8 @@ fs.readFile('Snip_2_input.txt', function (err, data) {
 Shows node's observation pattern.  
 - EventEmitter binds event with event handler function.  
 - When event is fired, event handler is called.  
-
-Code Patterns:  
+  
+Code patterns:  
 ```js
 var events = require('events');
 events.EventEmitter().on('connection', connectHandler);
@@ -45,8 +47,8 @@ events.EventEmitter().on('connection', connectHandler);
 Shows the shebang for node interpreter, uses http server, calls own module, shows how to make moduls and static functions.  
 - js file or module is like a class.  
 - exports.func is like a static function.  
-
-Code Patterns:  
+  
+Code patterns:  
 ```js
 mymod=require(./Snip_4_mymodule)
 mymod.myDateTime()
@@ -57,8 +59,8 @@ exports.myDateTime = function () {
 
 ### Snip_5_uploadfiles.js
 Shows http server, routing, js to send http strings, file picker, button for post request.  
-
-Code Patterns:  
+  
+Code patterns:  
 ```js
 //server routing
 if (req.url == '/fileupload') {
