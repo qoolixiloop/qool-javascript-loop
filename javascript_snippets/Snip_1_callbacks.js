@@ -1,4 +1,5 @@
 /*shows flow of information with callback functions*/
+//source:https://www.youtube.com/watch?v=xHneyv38Jro
 
 //1.) db
 var users=["Sam","Ellie","Bernie"]

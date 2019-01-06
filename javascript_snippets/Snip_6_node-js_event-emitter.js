@@ -1,3 +1,5 @@
+//source: https://www.tutorialspoint.com/nodejs/nodejs_event_emitter.htm
+
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
 

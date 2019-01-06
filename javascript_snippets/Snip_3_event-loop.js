@@ -1,4 +1,5 @@
 /*shows node's oberver pattern*/
+//source: https://www.tutorialspoint.com/nodejs/nodejs_event_loop.htm
 
 // 1.) Import events module
 var events = require('events');

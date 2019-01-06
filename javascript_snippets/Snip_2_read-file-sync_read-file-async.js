@@ -1,4 +1,5 @@
 /*read file sync and async*/
+//source: https://www.tutorialspoint.com/nodejs/nodejs_file_system.htm
 
 //1.) load module filesystem
 var fs = require("fs");
