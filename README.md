@@ -19,7 +19,7 @@ function addUser(username,callback){
 }
 ```
 
-## Snip_2_readfilesync_readfilesasync.js
+### Snip_2_readfilesync_readfilesasync.js
 Shows the flow of information with async readFile and callback function.  
 Code Patterns:  
 ```js
@@ -30,7 +30,7 @@ fs.readFile('Snip_2_input.txt', function (err, data) {
 });
 ```
 
-## Snip_3_eventloop.js
+### Snip_3_eventloop.js
 Shows node's observation pattern.  
 - EventEmitter binds event with event handler function.  
 - When event is fired, event handler is called.  
@@ -41,7 +41,7 @@ var events = require('events');
 events.EventEmitter().on('connection', connectHandler);
 ```
 
-## Snip_4_demo_module.js and Snip_4_mymodule.js
+### Snip_4_demo_module.js and Snip_4_mymodule.js
 Shows the shebang for node interpreter, uses http server, calls own module, shows how to make moduls and static functions.  
 - js file or module is like a class.  
 - exports.func is like a static function.  
@@ -55,7 +55,7 @@ exports.myDateTime = function () {
 }; 
 ```
 
-## Snip_5_uploadfiles.js
+### Snip_5_uploadfiles.js
 Shows http server, routing, js to send http strings, file picker, button for post request.  
 
 Code Patterns:  
@@ -71,6 +71,6 @@ res.write('<form action="fileupload" method="post" ' +
      ' enctype="multipart/form-data">');
 ```
 
-## Snip_6_nodejs_eventemitter.js
+### Snip_6_nodejs_eventemitter.js
 Shows node's observation pattern similar to Snip_3.  
 Also shows how event emitter removes/unbinds listeners from events.
