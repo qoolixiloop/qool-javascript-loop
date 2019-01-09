@@ -19,6 +19,8 @@
   myOneLineExpressions();
   //adds multiline text (statements do not evalueate)
   myMultiLineTextStatements();
+  //add footer
+  myFooter();
 })();
 
 
@@ -83,6 +85,12 @@ function myIntro(){
   tag("p","To try the code out open a shell, then enter:<br><strong>$ node</strong> and copy/paste the content.<br>");
   tag("div", "<br><strong>Source</strong> of the cheet-sheet content:<br>https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript<br>")
 
+}
+
+
+//footer
+function myFooter(){
+  tag("div", "<br>qoolixiloop, 9. Jan. 2019")
 }
 
 
@@ -444,7 +452,8 @@ function myMultiLineTextStatements(){
   tag("div", "In classic Object Oriented Programming, objects are collections of data and methods that operate on that data. JavaScript is a prototype-based language that contains no class statement, as you'd find in C++ or Java (this is sometimes confusing for programmers accustomed to languages with a class statement). Instead, JavaScript uses functions as classes. Actually, with ES6, there are now class, constructor,... keywords as well as arrow or lambda functions, as already known in TypeScript.<br><br>");
   pre(`
     //This works, but it's pretty ugly. 
-    //You end up with dozens of functions in your global namespace. 
+    //You end up with dozens of functions in your global namespace.
+    //notice the return-keyword
     function makePerson(first, last) {
       return {
         first: first,
@@ -457,12 +466,16 @@ function myMultiLineTextStatements(){
     function personFullNameReversed(person) {
       return person.last + ', ' + person.first;
     }
+    //create object without new-keyword
     var s = makePerson('Simon', 'Willison');
+    //call functions
     personFullName(s); // "Simon Willison"
     personFullNameReversed(s); // "Willison, Simon"
     `);  
   pre(`
     //Since functions are objects, we can attach member functions
+    //'this.' refers to the current object
+    //notice the return-keyword
     function makePerson(first, last) {
       return {
         first: first,
@@ -475,16 +488,173 @@ function myMultiLineTextStatements(){
         }
       };
     }
+    //create object without new-keyword
     var s = makePerson('Simon', 'Willison');
+    //call member functions
     s.fullName(); // "Simon Willison"
     s.fullNameReversed(); // "Willison, Simon"
+    //store output of member function in variable
+    var fullName = s.fullName();
+    fullName(); // "Simon Wilson"
+    //store classe's member function definition
+    //output is undefined: on class level attributes are undefined
+    var fullName = s.fullName;
+    fullName(); // undefined undefined
     `);  
   pre(`
-    
+    //Contructor functions: Capitalize the name.
+    //instead of return-statement we use this-keyword
+    //objects are now created with new-keyword.
+    //so, new-keyword actually returns the object.
+    function Person(first, last) {
+      this.first = first;
+      this.last = last;
+      this.fullName = function() {
+        return this.first + ' ' + this.last;
+      };
+      this.fullNameReversed = function() {
+        return this.last + ', ' + this.first;
+      };
+    }
+    //use new-keyword
+    //better but still ugly in the following sense:
+    //Every time we create a person object 
+    //we are creating two brand new function objects within it 
+    var s = new Person('Simon', 'Willison');
+    s.fullName() //'Simon Willison'
     `);  
   pre(`
-    
+    //function objects
+    function personFullName() {
+      return this.first + ' ' + this.last;
+    }
+    function personFullNameReversed() {
+      return this.last + ', ' + this.first;
+    }
+    //That's better: 
+    //we are creating the method functions only once, 
+    //and assigning references to them inside the constructor function. 
+    function Person(first, last) {
+      this.first = first;
+      this.last = last;
+      this.fullName = personFullName;
+      this.fullNameReversed = personFullNameReversed;
+    }
+    //object does not have its own member functions
+    //just references.
+    var s = new Person('Simon', 'Willison');
+    s.fullName() //'Simon Willison'
+    `); 
+  pre(`
+    //add a new function
+    function lastNameCaps() {
+      return this.last.toUpperCase();
+    }
+    //object has no reference to new function
+    //call function with call-method and pass object as argument
+    var s = new Person('Simon', 'Willison');
+    lastNameCaps.call(s);
+    //this is like adding the function definition to the object
+    //and then call it on the object. With the difference, that
+    //lastNameCaps.call(s) does not add the definition to the object s.
+    s.lastNameCaps = lastNameCaps;
+    s.lastNameCaps(); // WILLISON
+    `)
+  tag("div","<br>Person.prototype is an object shared by all instances of Person. It forms part of a lookup chain (that has a special name, 'prototype chain'): any time you attempt to access a property of Person that isn't set, JavaScript will check Person.prototype to see if that property exists there instead. As a result, anything assigned to Person.prototype becomes available to all instances of that constructor via the this object. This is an incredibly powerful tool. JavaScript lets you modify something's prototype at any time in your program, which means you can add extra methods to existing objects at runtime.<br><br>")
+  pre(`
+    //Better: The constructor function only contains
+    //the attributes
+    function Person(first, last) {
+      this.first = first;
+      this.last = last;
+    }
+    //the member functions
+    Person.prototype.fullName = function() {
+      return this.first + ' ' + this.last;
+    };
+    Person.prototype.fullNameReversed = function() {
+      return this.last + ', ' + this.first;
+    };
+    //create new object
+    var s = new Person('Simon', 'Willison');
+    //create new member function at runtime
+    Person.prototype.firstNameCaps = function() {
+      return this.first.toUpperCase();
+    };
+    s.firstNameCaps(); // "SIMON"
     `);  
+  pre(`
+    //you can also add properties to the prototype of built-in
+    //JS-Objects like String.
+    String.prototype.reversed = function() {
+      var r = '';
+      for (var i = this.length - 1; i >= 0; i--) {
+        r += this[i];
+      }
+      return r;
+    };
+    var s = 'Simon';
+    s.reversed(); // nomiS
+    'This can now be reversed'.reversed(); // desrever eb won nac sihT
+    `);  
+  pre(`
+    //create new object and call toString() method
+    var s = new Person('Simon', 'Willison');
+    s.toString(); // [object Object]
+    //add a toString method to prototype
+    Person.prototype.toString = function() {
+      return '<Person: ' + this.fullName() + '>';
+    }
+    //now we get some useful info
+    s.toString(); // "<Person: Simon Willison>"
+    `);  
+  pre(`
+    //trivial implementation of the new-keyword
+    function trivialNew(constructor, ...args) {
+      var o = {}; // Create an object
+      constructor.apply(o, args);
+      return o;
+    }
+    //the two object creaters new and trivialNew are nearly equivalent:
+    var bill = trivialNew(Person, 'William', 'Orange');
+    var bill = new Person('William', 'Orange');
+    `);  
+  tag("h2","JavaScript Inner Functions");
+  pre(`
+    //nested function can access parent attributes
+    //but not vice versa.
+    function parentFunc() {
+      var a = 1;
+
+      function nestedFunc() {
+        var b = 4; // parentFunc can't use this
+        return a + b; 
+      }
+      return nestedFunc(); // 5
+    }
+    `);  
+  tag("h2","JavaScript Closures");
+  tag("div","More here about closures: https://stackoverflow.com/questions/111102/how-do-javascript-closures-work<br><br>");
+  pre(`
+    //define closure
+    function makeAdder(a) {
+      return function(b) {
+        return a + b;
+      };
+    }
+    //call closure
+    //x and y now store the code of the inner function.
+    //somewhere the values of a=5 or a=20 are stored and remain accessible. 
+    //The place where the properties are stored is called a scope object.
+    //Closures keep a reference to the scope object even after they 
+    //return, that's why argument a is still availabe.
+    var x = makeAdder(5);
+    var y = makeAdder(20);
+    //6 and 7 are assigned to the attribute b
+    x(6); // ? 11
+    y(7); // ? 27
+    `);  
+  pre(``);  
   pre(``);  
   pre(``);  
   
