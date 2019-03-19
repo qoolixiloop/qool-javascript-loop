@@ -63,8 +63,8 @@ function tag(tag, text){
 
 //
 function myIntro(){
-  tag("h1","JavaScript Cheet-Sheet");
-  tag("div","This cheet-sheet is generated with one single JavaScript file <strong>cheet-sheet.js</strong>. The <strong>index.html</strong> only contains some minimal styling and one empty div-tag with id=content, where the whole content is plugged in.<br>")
+  tag("h1","JavaScript Cheat-Sheet");
+  tag("div","This cheat-sheet is generated with one single JavaScript file <strong>cheat-sheet.js</strong>. The <strong>index.html</strong> only contains some minimal styling and one empty div-tag with id=content, where the whole content is plugged in.<br>")
   tag("xmp",`
     <!DOCTYPE html>
     <html>
@@ -77,13 +77,13 @@ function myIntro(){
           #content > p,pre:nth-child(2n) { background-color:#ddd }
         </style>
         <div id="content"></div>
-          <script type="text/javascript" src="cheet-sheet.js"></script>
+          <script type="text/javascript" src="cheat-sheet.js"></script>
       </body>
     </html>
     `)
   tag("p","To start this web-page open a shell, then enter: <strong>$ cd project-folder</strong> followed by <strong>$ chromium-browser index.html</strong>");
   tag("p","To try the code out open a shell, then enter:<br><strong>$ node</strong> and copy/paste the content.<br>");
-  tag("div", "<br><strong>Source</strong> of the cheet-sheet content:<br>https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript<br>")
+  tag("div", "<br><strong>Source</strong> of the cheat-sheet content:<br>https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript<br>")
 
 }
 
