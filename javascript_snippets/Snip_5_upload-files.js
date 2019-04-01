@@ -33,7 +33,7 @@ http.createServer(function (req, res) {
       
       //file should be stored here:
       var newpath = '/home/benzro/Documents/LxTerminal_UnixCommands/'+
-        'JavaScript_Snippets/loose_js_files/' + files.filetoupload.name;
+        'JavaScript_Snippets/' + files.filetoupload.name;
       
       //rename means move, 
       //anonymous function has access to first two arguments
